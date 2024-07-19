@@ -1,0 +1,8 @@
+<div class = "flex px-16">
+  <div class = "flex-none w-80">
+    <%= link_to "Create a Presentation", new_presentation_path, class: "px-12 py-3 bg-[#404040] box-border rounded-md text-white font-semibold" %>
+  </div>
+  <div class = "flex gap-6 flex-col flex-auto w-4">
+    <%= render 'shared/presentation', presentations: @presentations %>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="evaluation">
+    <p><%= evaluation.user.name %></p>
+    <p>Points: <%= evaluation.points %></p>
+    <p><%= evaluation.feedback %></p>
+    <%=button_to "Delete", [evaluation.presentation, evaluation], method: :delete, data: {confirm: "Are you sure ?" } %>
+</div>
+

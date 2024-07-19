@@ -1,0 +1,19 @@
+<%= form_for(@presentation) do |f| %>
+  <div class="field">
+    <%= f.label :title, class: "input" %>
+    <%= f.text_field :title, required: true, class: 'input' %>
+  </div>
+  <div class="field">
+    <%= f.label :description, class: "textarea" %>
+    <%= f.text_area :description, required: true, class: 'textarea' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date, class: "date" %>
+    <%= f.date_field :date, required: true, class: 'date' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

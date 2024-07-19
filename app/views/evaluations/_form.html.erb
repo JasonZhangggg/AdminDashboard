@@ -1,0 +1,27 @@
+<%= form_with(model: [@presentation, Evaluation.new], local: true) do |f|%>
+    <% if f.object.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this evaluation from being saved:</h2>
+            <ul>
+            <% f.object.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= f.label :points, class: "label" %>
+        <%= f.number_field :points, required: true, class: 'integer' %>
+    </div>
+    
+    <div class="field">
+        <%= f.label :feedback, class: "label" %>
+        <%= f.text_area :feedback, required: true, class: 'textarea' %>
+    </div>
+
+    <div class="form-actions">
+        <%= f.submit %>
+    </div>
+    
+<%end%>

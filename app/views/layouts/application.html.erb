@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Discussions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
+    <%=csrf_meta_tags %> <%= csp_meta_tag %>
+    <%=stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%=javascript_importmap_tags %>
+  </head>
+  <body>
+    <nav
+      class="flex justify-between items-center flex-wrap px-16 py-4 w-full border-b mb-12">
+      <h2 class="flex-none text-3xl font-semibold">Presentations</h2>
+      <%if user_signed_in?%>
+        <div class="relative inline-block text-left text-gray-700" id="dropdown">
+          <button type="button" class="flex items-center gap-2 text-lg font-semibold px-3 py-2" id="menu-button">
+            Account
+            <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          </button>
+          <div class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" id="dropdown-content">
+            <%= link_to current_user.name.capitalize, edit_user_registration_path, class:"block px-4 py-2 text-sm" %>
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, class:"block px-4 py-2 text-sm" %>
+          </div>
+        </div>
+      <%else%>
+        <div class="flex gap-6">
+          <%= link_to "Sign In", new_user_session_path, class:"block px-4 py-2 text-sm" %>
+          <%= link_to "Sign Up", new_user_registration_path, class:"block px-4 py-2 text-sm" %>
+        </div>
+      <%end%>
+    </nav>
+    <% if false %>
+      <% if flash[:notice] %>
+        <div class="bg-green-500 text-white">
+          <p class="notice"><%= notice %></p>
+        </div>
+      <% end %> <% if flash[:alert] %>
+        <div class="bg-red-500 text-white">
+          <p class="alert"><%= alert %></p>
+        </div>
+      <% end %>
+    <%end%>
+    <section>
+      <%= yield %>
+    </section>
+  </body>
+</html>

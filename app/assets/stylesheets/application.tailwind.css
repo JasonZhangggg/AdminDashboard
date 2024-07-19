@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .form-input {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg block w-full p-2.5;
+  }
+  .form-label {
+    @apply block mb-2 text-base font-medium text-gray-900;
+  }
+  .form-checkbox {
+    @apply w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded mr-2;
+  }
+  .form-hint {
+    @apply font-light text-sm text-gray-600;
+  }
+  .error {
+    @apply block text-base font-medium text-red-600 mt-1;
+  }
+}

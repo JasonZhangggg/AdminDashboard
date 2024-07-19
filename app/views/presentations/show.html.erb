@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+<h1 class="text-3xl"><%= @presentation.title %></h1>
+<p><%= @presentation.created_at.strftime("%A, %B %d, %Y")%></p>
+<p><%= @presentation.description %></p>
+<p><%= @presentation.evaluations.count %> Replies</p>
+<%= render 'evaluations/form' %>
+<div>
+  <%= render @presentation.evaluations%>
+</div>
+<%= link_to 'Back', presentations_path, class:'button' %>
