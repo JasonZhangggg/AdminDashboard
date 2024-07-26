@@ -10,6 +10,14 @@ Rails.application.routes.draw do
     resources :evaluations
   end
 
+  
+  resources :presentations do
+    member do
+      patch :update_grade
+    end
+  end
+
+
   # Defines the root path route ("/")
   root "presentations#index"
 

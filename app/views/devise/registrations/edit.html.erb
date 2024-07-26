@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center">
   <div class="flex flex-col gap-5 w-[35rem] rounded-lg px-10 py-8 shadow-md  justify-center bg-white">
     <%= link_to presentations_path, class:"text-xl font-medium text-blue-600" do %>
-      <i class="fa fa-arrow-left"></i> Back
+      <i class="fa fa-arrow-left"></i> <strong>Back</strong>
     <% end %>
     <h1 class="text-3xl font-bold leading-tight tracking-tight text-gray-900">Edit account</h1>
     <% if current_user.admin? %>

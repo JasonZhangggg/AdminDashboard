@@ -64,6 +64,29 @@ class PresentationsController < ApplicationController
     end
   end
 
+
+def update_grade
+  @presentation = Presentation.find(params[:id])
+  if @presentation.update(grade_params)
+    redirect_to @presentation, notice: 'Grade was successfully updated.'
+  else
+    render :edit, alert: 'Failed to update grade.'
+  end
+end
+
+private
+
+def grade_params
+  params.require(:presentation).permit(:grade)
+end
+
+before_action :check_admin, only: [:update_grade]
+
+def check_admin
+  redirect_to(root_url, alert: "You are not authorized to perform this action.") unless current_user.admin?
+end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_presentation

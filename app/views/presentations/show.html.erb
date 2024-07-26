@@ -1,26 +1,67 @@
 <div class="flex items-center justify-center w-full">
-  <div class="flex flex-col gap-5 w-3/4 rounded-lg px-10 py-8 shadow-md  justify-center bg-white">
+  <div class="flex flex-col gap-5 w-3/4 w-max-[125rem] rounded-lg px-10 py-8 shadow-md  justify-center bg-white">
     <%= link_to presentations_path, class:"text-xl font-medium text-blue-600" do %>
-      <i class="fa fa-arrow-left"></i> Back
+      <i class="fa fa-arrow-left"></i> <strong>Back</strong>
     <% end %>
-    <div class="flex flex-col gap-4">
-      <h1 class = "font-semibold text-3xl"><%=@presentation.title.capitalize%></h1>
-      <div class = "flex gap-4 items-center">
-        <%= render 'shared/avatar', letter: @presentation.user.name[0].upcase, id: @presentation.user_id%>
-        <div>
-          <h1 class = "font-semibold text-xl"><%=@presentation.user.name.capitalize%></h1>
-          <p class="text-gray-500"><%= @presentation.date.strftime("%A, %B %d, %Y")%></p>
+    <div class="flex flex-col">
+      <div class="flex justify-between items-center">
+        <div class = "flex gap-4 items-center">
+          <%= render 'shared/avatar', letter: @presentation.user.name[0].upcase, id: @presentation.user_id%>
+          <div>
+            <h1 class="font-semibold text-xl"><%= @presentation.user.name.capitalize %></h1>
+            <p class="text-gray-500"><%= @presentation.date.strftime("%A, %B %d, %Y") %></p>
+          </div>
         </div>
+        <% if @presentation.user == current_user || current_user.admin? %>
+          <div class="flex gap-4 items-center justify-center">
+            <%= link_to edit_presentation_path(@presentation),
+                  method: :delete, data: {confirm: "Are you sure ?" } do %>
+              <i class="fa fa-pencil fa-lg"></i>
+            <%end%>
+            <%= button_to @presentation,
+            method: :delete, data: {confirm: "Are you sure ?" } do %>
+              <i class="fa fa-trash-o fa-lg"></i>
+            <%end%>
+          </div>
+        <%end%>
       </div>
+      <h1 class = "font-semibold text-2xl mt-4"><%=@presentation.title.capitalize%></h1>
       <p class = "text-gray-500"><%=@presentation.description%></p>
     </div>
-    <% if @presentation.user != current_user %>
-      <hr class="h-px bg-gray-200 border-0">
+    <% if @presentation.user == current_user || current_user.admin? %>
+      <% if current_user.admin? %>
+        <%= simple_form_for @presentation, url: update_grade_presentation_path(@presentation), method: :patch do |f| %>
+          <div class="flex items-center">
+            <span class="font-bold mr-2 text-lg">Grade:</span>
+            <%= f.input :grade, collection: ['N/A', 'A', 'B', 'C', 'D', 'F'], selected: @presentation.grade, label: false, input_html: { class: "block py-2.5 text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none" } %>
+          </div>
+          <%= f.button :submit, "Set Grade", class: "mt-4 text-sm text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg px-3 py-2 text-center" %>
+        <% end %>
+      <% else %>
+        <div class="flex items-center">
+          <span class="font-bold mr-2 text-lg">Grade:</span><%= @presentation.grade || "N/A" %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @presentation.user != current_user || current_user.admin? %>
+      <hr class="h-px bg-gray-200 border-0 my-4">
       <%= render 'evaluations/form' %>
-    <% end %>  </div>
+    <% end %>
+  </div>
 </div>
-<% if @presentation.user == current_user || current_user.admin?%>
-  <%= render @presentation.evaluations%>
-<% elsif %>
-  <%= render @presentation.evaluations.where(user_id: current_user.id)%>
-<% end %>
+<div class="flex items-center justify-center w-full mt-4">
+  <div class="flex flex-col gap-5 w-3/4 w-max-[125rem] rounded-lg px-10 py-8 shadow-md bg-white justify-center">
+    <div class="flex items-center">
+      <h1 class="font-semibold text-2xl pr-6">Evaluations</h1>
+      <i class="material-symbols-outlined text-gray-500 pr-1">forum</i>
+      <p class="text-gray-500">
+        <%= pluralize(@presentation.evaluations.count, 'Evaluation') %>
+      </p>
+    </div>
+    <% if @presentation.user == current_user || current_user.admin?%>
+      <%= render @presentation.evaluations%>
+    <% else %>
+      <%= render @presentation.evaluations.where(user_id: current_user.id)%>
+    <% end %>
+  </div>
+</div>
