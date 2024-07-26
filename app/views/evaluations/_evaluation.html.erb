@@ -1,7 +1,20 @@
-<div class="evaluation">
-    <p><%= evaluation.user.name %></p>
-    <p>Points: <%= evaluation.points %></p>
-    <p><%= evaluation.feedback %></p>
-    <%=button_to "Delete", [evaluation.presentation, evaluation], method: :delete, data: {confirm: "Are you sure ?" } %>
+<div class="flex items-center justify-center w-full mt-4">
+  <div class="flex flex-col gap-5 w-3/4 rounded-lg px-10 py-8 shadow-md bg-white justify-center">
+    <div class="flex flex-col gap-4">
+      <div class = "flex gap-4">
+        <%= render 'shared/avatar', letter: evaluation.user.name[0].upcase, id: evaluation.user_id%>
+        <div>
+          <p>
+            <span class="font-semibold">
+              <%=evaluation.user.name.capitalize%>
+            </span>
+            evaluated on <%= evaluation.created_at.strftime("%A, %B %d, %Y")%>
+          </p>
+          <p class = "text-gray-500">Score: <%=evaluation.points%> points</p>
+        </div>
+      </div>
+      <p class = "text-gray-500"><%=evaluation.feedback%></p>
+    </div>
+    <%=button_to "Delete", [evaluation.presentation, evaluation], method: :delete, data: {confirm: "Are you sure ?" }, class:"font-medium text-blue-600"%>
+  </div>
 </div>
-

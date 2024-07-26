@@ -1,8 +1,10 @@
-<div class = "flex px-16">
-  <div class = "flex-none w-80">
-    <%= link_to "Create a Presentation", new_presentation_path, class: "px-12 py-3 bg-[#404040] box-border rounded-md text-white font-semibold" %>
-  </div>
-  <div class = "flex gap-6 flex-col flex-auto w-4">
-    <%= render 'shared/presentation', presentations: @presentations %>
+<div class="flex justify-center">
+  <div class = "w-3/4 xlg:w-[125rem]">
+    <div class="flex mb-8">
+      <%= link_to "Create a Presentation", new_presentation_path, class: "px-12 py-3 bg-blue-600 box-border rounded-md text-white font-semibold" %>
+    </div>
+    <div class = "flex gap-6 flex-col">
+      <%= render 'shared/presentation', presentations: @presentations %>
+    </div>
   </div>
 </div>

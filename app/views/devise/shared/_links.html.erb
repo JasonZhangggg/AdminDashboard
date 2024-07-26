@@ -1,5 +1,5 @@
 <%- if controller_name != 'sessions' %>
-  <p class="form-hint">Already have an account? <%= link_to "Log in", new_session_path(resource_name), class:"font-medium text-blue-600"%></p>
+  <p class="form-hint">Already have an account? <%= link_to "Login", new_session_path(resource_name), class:"font-medium text-blue-600"%></p>
 <% end -%>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <p class="form-hint">Don't have an account? <%= link_to "Create one here", new_registration_path(resource_name), class:"font-medium text-blue-600"%></p>

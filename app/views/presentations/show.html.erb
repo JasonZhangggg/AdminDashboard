@@ -1,10 +1,21 @@
-<p style="color: green"><%= notice %></p>
-<h1 class="text-3xl"><%= @presentation.title %></h1>
-<p><%= @presentation.created_at.strftime("%A, %B %d, %Y")%></p>
-<p><%= @presentation.description %></p>
-<p><%= @presentation.evaluations.count %> Replies</p>
-<%= render 'evaluations/form' %>
-<div>
-  <%= render @presentation.evaluations%>
+<div class="flex items-center justify-center w-full">
+  <div class="flex flex-col gap-5 w-3/4 rounded-lg px-10 py-8 shadow-md  justify-center bg-white">
+    <%= link_to presentations_path, class:"text-xl font-medium text-blue-600" do %>
+      <i class="fa fa-arrow-left"></i> Back
+    <% end %>
+    <div class="flex flex-col gap-4">
+      <h1 class = "font-semibold text-3xl"><%=@presentation.title.capitalize%></h1>
+      <div class = "flex gap-4 items-center">
+        <%= render 'shared/avatar', letter: @presentation.user.name[0].upcase, id: @presentation.user_id%>
+        <div>
+          <h1 class = "font-semibold text-xl"><%=@presentation.user.name.capitalize%></h1>
+          <p class="text-gray-500"><%= @presentation.date.strftime("%A, %B %d, %Y")%></p>
+        </div>
+      </div>
+      <p class = "text-gray-500"><%=@presentation.description%></p>
+    </div>
+    <hr class="h-px bg-gray-200 border-0">
+    <%= render 'evaluations/form' %>
+  </div>
 </div>
-<%= link_to 'Back', presentations_path, class:'button' %>
+<%= render @presentation.evaluations%>
