@@ -22,7 +22,7 @@
 <% end %>
 <% other_presentations.each do |presentation| %>
   <%= link_to presentation do %>
-    <div class="flex justify-between bg-[#eff1f1] hover:bg-[#e4e4e8] p-6 rounded-md">
+    <div class="flex justify-between bg-white shadow-md hover:bg-[#eff1f1] p-6 rounded-md">
       <div class="flex flex-col gap-4">
         <div class = "flex gap-4 items-center">
           <%= render 'shared/avatar', letter: presentation.user.name[0].upcase, id: presentation.user_id%>
@@ -39,12 +39,6 @@
           </div>
         </div>
         <p class = "text-gray-500"><%=presentation.description%></p>
-      </div>
-      <div class = "card-footer">
-        <%= button_to presentation,
-                  method: :delete, data: {confirm: "Are you sure ?" } do %>
-          <i class="fa fa-trash-o text-3xl"></i>
-        <%end%>
       </div>
     </div>
   <% end %>

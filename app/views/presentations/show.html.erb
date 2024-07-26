@@ -14,8 +14,13 @@
       </div>
       <p class = "text-gray-500"><%=@presentation.description%></p>
     </div>
-    <hr class="h-px bg-gray-200 border-0">
-    <%= render 'evaluations/form' %>
-  </div>
+    <% if @presentation.user != current_user %>
+      <hr class="h-px bg-gray-200 border-0">
+      <%= render 'evaluations/form' %>
+    <% end %>  </div>
 </div>
-<%= render @presentation.evaluations%>
+<% if @presentation.user == current_user || current_user.admin?%>
+  <%= render @presentation.evaluations%>
+<% elsif %>
+  <%= render @presentation.evaluations.where(user_id: current_user.id)%>
+<% end %>
