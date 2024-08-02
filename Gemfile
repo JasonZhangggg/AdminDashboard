@@ -41,6 +41,7 @@ gem 'friendly_id'
 gem 'redcarpet'
 gem 'jquery-rails'
 gem 'tailwindcss-rails'
+gem 'faker'
 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
